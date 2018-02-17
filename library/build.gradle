@@ -1,0 +1,83 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        resourcePrefix 'library_'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation rootProject.ext.dependencies.junit
+    androidTestImplementation rootProject.ext.dependencies.test_runner
+    androidTestImplementation rootProject.ext.dependencies.espresso_core
+
+    //Kotlin
+    api rootProject.ext.dependencies.kotlin
+
+    //Android libraries
+    api rootProject.ext.dependencies.appcompat_v7
+    api rootProject.ext.dependencies.design
+    api rootProject.ext.dependencies.cardview_v7
+    api rootProject.ext.dependencies.recyclerview_v7
+
+    //Room
+    api rootProject.ext.dependencies.room
+    kapt rootProject.ext.dependencies.room_compiler
+
+    //Google play services
+    api rootProject.ext.dependencies.play_services_maps
+    api rootProject.ext.dependencies.play_services_location
+
+    //Dagger 2
+    api rootProject.ext.dependencies.dagger
+    kapt rootProject.ext.dependencies.dagger_compiler
+
+    //ButterKnife
+    api rootProject.ext.dependencies.butterknife
+    kapt rootProject.ext.dependencies.butterknife_compiler
+
+    //Retrofit
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies.retrofit_converter_gson
+    api rootProject.ext.dependencies.retrofit_rxjava_adapter
+
+    //Glide
+    api rootProject.ext.dependencies.glide
+    kapt rootProject.ext.dependencies.glide_compiler
+
+    //EventBus
+    api rootProject.ext.dependencies.eventbus
+
+    //LeakCanary
+    debugApi rootProject.ext.dependencies.leakcanary_debug
+    releaseApi rootProject.ext.dependencies.leakcanary_release
+
+    //RxJava, RxAndroid
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+}
