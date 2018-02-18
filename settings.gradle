@@ -1,1 +1,1 @@
-include ':app', ':library', ':toolkit', ':core', ':placemodule'
+include ':app', ':library', ':toolkit', ':core', ':placemodule', ':service'
